@@ -2,6 +2,8 @@
 Multiset Rewriting with Comprehensions
 by Edmund S. L. Lam and Iliano Cervesato
 
+* This implementation was made possible by an NPRP grant (NPRP 09-667-1-100, Effective Programming for Large Distributed Ensembles) from the Qatar National Research Fund (a member of the Qatar Foundation). 
+
 ############
 Introduction
 ############
@@ -33,6 +35,16 @@ Non-standard Python packages:
 * Currently only tested on Ubuntu, but do try on other platforms and feel free to report any bugs or issues to us!
 ** Apologies for the sparse instructions! More information to come soon! 
 
+################
+Acknowledgements
+################
+
+Many thanks to the following, who have made this prototype implementation possible:
+  - Qatar Foundation, the sponsor of this project.
+  - Curtis Schlak for excellent suggests on light-weight visitor pattern for Python.
+  - People who worked on z3 SMT solver, for building such an awesome easy to use SMT solver with Python bindings.
+  - People who worked on Claytronics, which has inspired our work here (Flavio Cruz, Frank Pfenning and Seth Goldstein). 
+
 #####
 Notes
 #####
@@ -49,3 +61,4 @@ Notes
     In the near future, CHR^CP and MSRE will be a unified language:
     combining the idea of multiset rewriting with comprehensions,
     and decentralized execution of multiset rewritings.
+
