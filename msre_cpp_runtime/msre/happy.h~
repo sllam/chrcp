@@ -1,0 +1,8 @@
+
+
+list<int> happy(int x) {
+
+	list<int> xs;
+	return xs;
+
+}

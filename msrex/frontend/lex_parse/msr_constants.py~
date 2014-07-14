@@ -1,0 +1,8 @@
+
+LOC    = 'loc'
+INT    = 'int'
+FLOAT  = 'float'
+CHAR   = 'char'
+STRING = 'string'
+BOOL   = 'bool'
+DEST   = 'dest'

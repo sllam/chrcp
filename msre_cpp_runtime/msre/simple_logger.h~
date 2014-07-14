@@ -1,0 +1,92 @@
+
+#include <time.h>
+
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+
+#ifdef MSRE_LOG
+	#define LOG( stmt ) stmt 
+	#ifdef MSRE_NO_FILE
+		#define FOUT( stmt )
+	#else
+		#define FOUT( stmt ) stmt
+	#endif
+	#ifdef MSRE_VERBOSE
+		#define SOUT( stmt ) stmt
+	#else
+		#define SOUT( stmt )
+	#endif
+#else
+	#define LOG( stmt ) 
+	#define FOUT( stmt )
+	#define SOUT( stmt )
+#endif
+
+string get_time_str() {
+	time_t rawtime;
+	struct tm * timeinfo;
+	char buffer [80];
+	time(&rawtime);
+	timeinfo = localtime(&rawtime);
+	strftime (buffer,80,"%F %T",timeinfo);
+	stringstream ss;
+	ss << buffer;
+	return ss.str();
+}
+
+struct SourceInfo {
+	int line_no;
+	string file_name;
+
+	public: SourceInfo(string f, int l) : line_no(l), file_name(f) { }
+
+	public: string to_string() {
+		stringstream ss;
+		ss << "<" << file_name << ":" << line_no << ">";
+		return ss.str();
+	}
+};
+
+SourceInfo src(string fname, int line_no) {
+	return SourceInfo(fname, line_no);
+}
+
+class Logger {
+
+	string logger_name;
+	const char* out_file_name;
+	ofstream* out_file;
+
+	public: Logger(string lname, string fname) {
+		logger_name   = lname;
+		out_file_name = (fname + ".log").c_str();
+		out_file = new ofstream(out_file_name, std::ofstream::out | std::ofstream::app);
+	}
+
+	public: string format_log_msg(string log_type, string msg, optional<SourceInfo> srcinfo) {
+		stringstream ms;
+		ms << "<" << log_type << "> ";
+		if (srcinfo) {
+			ms << srcinfo->to_string() << " ";
+		}
+		ms << "<" << get_time_str() << "> " << msg;
+		return ms.str();
+	}
+
+	public: void info(string msg, optional<SourceInfo> srcinfo = optional<SourceInfo>() ) {
+		string log_entry = format_log_msg("info", msg, srcinfo);
+		SOUT( cout << log_entry << endl );
+		FOUT({ 
+			(*out_file) << log_entry << endl;
+			out_file->flush();
+		});
+	}
+
+	public: void close() {
+		FOUT( out_file->close() );
+	}
+
+};
+

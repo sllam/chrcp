@@ -1,0 +1,18 @@
+ensem swapper {
+
+	predicate swap :: (loc,int) -> fact.
+	predicate data :: (int) -> fact.
+
+	rule pivotSwap :: [X]swap(Y,P), { [X]data(D) | D <- Xs. D >= P }, { [Y]data(D) | D <- Ys. D < P } 
+                             --o { [Y]data(D) | D <- Xs }, { [X]data(D) | D <- Ys }.
+
+}
+
+execute swapper {
+
+	exists L0, L1.
+	[L0]swap(L1,4).
+	[L0]data(50), [L0]data(60), [L0]data(2).
+	[L1]data(1), [L1]data(3), [L1]data(5).
+
+}
