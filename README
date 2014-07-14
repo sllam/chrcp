@@ -1,5 +1,51 @@
 
-Constraint Handling Rules with Comprehension
+Multiset Rewriting with Comprehensions
 by Edmund S. L. Lam and Iliano Cervesato
 
-Work in progress! Updates ETA: End of June 2014. Please stay tuned!
+############
+Introduction
+############
+
+A prototype implementation of multiset rewriting with comprehension.
+
+See our paper and technical report for details:
+
+i. Constraint Handling Rules with Comprehension
+http://www.qatar.cmu.edu/~sllam/my_papers/published/SLLAM_chr14.pdf
+
+ii. "Optimized Compilation of Multiset Rewriting with Comprehensions"
+http://www.qatar.cmu.edu/~sllam/my_papers/techreport/SLLAM_TR14-119.pdf
+
+##################
+Basic Requirements
+##################
+
+System Applications:
+   - Python 2.7
+   - MPI Distribution, preferably MPI-2
+   - C++ Boost Libraries
+   - System development libraries for Python and MPI
+
+Non-standard Python packages:
+   - ply (Python Lex-Yacc http://www.dabeaz.com/ply/)
+   - z3Py: Python APIs for z3 SMT Solver (Check https://z3.codeplex.com/ for installation details)
+
+* Currently only tested on Ubuntu, but do try on other platforms and feel free to report any bugs or issues to us!
+** Apologies for the sparse instructions! More information to come soon! 
+
+#####
+Notes
+#####
+
+13 July 2014: 
+  - There are some minor syntactic difference between the
+    language implemented here, and that of presented in
+    our technical report. We are currently working on finalizing
+    the concrete syntax of our language and documentation, 
+    For now, please refer to the examples contained in this
+    package. Stay tuned for updates!
+  - We are currently merging this code base with that of from 
+    another project - Multi Set Rewriting for Ensembles (MSRE).
+    In the near future, CHR^CP and MSRE will be a unified language:
+    combining the idea of multiset rewriting with comprehensions,
+    and decentralized execution of multiset rewritings.
